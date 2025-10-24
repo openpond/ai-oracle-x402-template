@@ -13,15 +13,16 @@ export const schema = z.object({
 export const payment = definePayment({
   amount: "0.001",
   currency: "USDC",
-  payTo: process.env.TURNKEY_WALLET_ADDRESS!,
+  payTo: process.env.WALLET_ADDRESS!,
   message: "Premium analytics require payment before access.",
+  resource: process.env.DEPLOYMENT_URL!,
   acceptedMethods: ["x402", "402"],
   acceptedCurrencies: ["USDC"],
   chainIds: [8453],
-  facilitator: "opentool",
+  facilitator: "coinbase",
 });
 
-export const mcp = { enabled: true };
+export const mcp = { enabled: false };
 
 export async function POST(request: Request) {
   const payload = await request.json();

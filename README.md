@@ -12,21 +12,27 @@ A template for creating MCP (Model Context Protocol) agents with x402 payment su
 ## Quick Start
 
 1. **Create your environment file:**
+
    ```bash
    cp .env.example .env
    ```
+
    Update the file with your required credentials:
-   - `TURNKEY_WALLET_ADDRESS` – Your Turnkey wallet address for receiving payments
+
+   - `WALLET_ADDRESS` – Your wallet address for receiving payments
+   - `DEPLOYED_URL` – Base URL (e.g. `https://your-app.openpond.live`) used in x402 payment metadata
    - Additional API keys as needed for the OpenPond gateway
 
 1. **Install dependencies:**
+
    ```bash
-   npm install
+   bun install
    ```
 
 1. **Build the project:**
+
    ```bash
-   npm run build
+   bun run build
    ```
 
 1. **Test locally with MCP Inspector:**
@@ -50,7 +56,7 @@ This template showcases:
 
 After building, you'll find these files in `dist/`:
 
-- **`mcp-server.js`** – stdio MCP server for Node/Lambda execution
+- **`mcp-server.js`** – stdio MCP server for Node/Lambda execution (if mcp is enabled)
 - **`metadata.json`** – Complete tool and project metadata (spec `v1.0.0`)
 - **`tools/ai-oracle.js`** – Compiled AI Oracle tool
 
@@ -59,6 +65,7 @@ After building, you'll find these files in `dist/`:
 Use the MCP Inspector to test the AI Oracle tool:
 
 **AI Oracle Example:**
+
 ```json
 {
   "question": "What is the price of BTC?"
@@ -66,11 +73,43 @@ Use the MCP Inspector to test the AI Oracle tool:
 ```
 
 Other example questions:
+
 - "Calculate the square root of 144"
 - "What are the latest developments in AI?"
 - "Explain quantum computing in simple terms"
 
 The tool requires x402 payment before returning results. Set `OPENPOND_GATEWAY_URL` or `OPENPOND_API_KEY` in your environment if you need to target a custom gateway or authenticated provider.
+
+### Quick x402 test with curl
+
+1. Start the dev server:
+
+   ```bash
+   npx opentool dev --input tools
+   ```
+
+2. Trigger the paywall and inspect the returned payment requirements:
+
+   ```bash
+   curl -i \
+     -X POST http://localhost:7000/ai-oracle \
+     -H "content-type: application/json" \
+     -d '{"question":"What is the price of BTC?"}'
+   ```
+
+   The response includes `402 Payment Required` with an `x402.accepts[0]` object that references your `DEPLOYED_URL`.
+
+3. Submit a follow-up request using a facilitator-signed payload:
+
+   ```bash
+   curl -i \
+     -X POST http://localhost:7000/ai-oracle \
+     -H "content-type: application/json" \
+     -H "X-PAYMENT: ${X402_HEADER}" \
+     -d '{"question":"What is the price of BTC?"}'
+   ```
+
+   Replace `${X402_HEADER}` with the base64-encoded `X-PAYMENT` header returned by your Coinbase/OpenTool facilitator. A valid payload returns `200 OK`; otherwise the server sends another `402` with error details.
 
 ## Metadata Configuration
 
