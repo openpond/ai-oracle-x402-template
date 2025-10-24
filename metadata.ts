@@ -1,13 +1,13 @@
 export const metadata = {
   // Core metadata fields (top-level in registry.json)
-  name: "mcp-x402-template",
-  displayName: "MCP X402 Template",
-  description: "A template for creating MCP agents with X402 support",
+  name: "ai-oracle-mcp-x402-template",
+  displayName: "AI Oracle MCP X402 Template",
+  description: "A template for creating MCP agents with x402 support",
   version: "1.0.0",
   chains: ["base-sepolia"],
   author: "OpenPond",
-  website: "https://github.com/openpond/mcp-x402-template",
-  repository: "https://github.com/openpond/mcp-x402-template",
+  website: "https://github.com/openpond/ai-oracle-mcp-x402-template",
+  repository: "https://github.com/openpond/ai-oracle-mcp-x402-template",
   category: "example", // Single category for top-level field
   termsOfService: "Please review terms before use.",
   // Payment configuration

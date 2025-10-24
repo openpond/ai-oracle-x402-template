@@ -1,7 +1,7 @@
 {
-  "name": "opentool-example",
+  "name": "ai-oracle-mcp-x402-template",
   "version": "1.0.0",
-  "description": "Example OpenTool project",
+  "description": "A template for creating MCP agents with X402 support",
   "scripts": {
     "dev": "opentool dev",
     "build": "opentool build --input tools --output dist",

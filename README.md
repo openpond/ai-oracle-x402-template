@@ -1,16 +1,12 @@
-# Full Metadata OpenTool Example
+# AI Oracle MCP X402 Template
 
-This example demonstrates a complete OpenTool project with metadata configuration, calculator utilities, and several AI-powered endpoints built on the `opentool/ai` package.
+A template for creating MCP (Model Context Protocol) agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework.
 
 ## Files
 
-- `tools/calculate.ts` – Calculator with discovery metadata and 402 payments
-- `tools/ai-summarize.ts` – Summary generator using `generateText`
-- `tools/ai-research.ts` – Research assistant with auto web search tool calling
-- `tools/ai-code-suggestion.ts` – Code snippet drafter with configurable constraints
-- `tools/ai-streaming-outline.ts` – Streaming outline generator demonstrating `streamText`
-- `metadata.ts` – Complete metadata configuration
-- `package.json` – Project configuration
+- `tools/ai-oracle.ts` – AI-powered question answering tool with x402 payment integration
+- `metadata.ts` – Complete metadata configuration including payment settings
+- `package.json` – Project configuration with OpenTool dependencies
 - `dist/` – Generated files after build
 
 ## Quick Start
@@ -19,7 +15,9 @@ This example demonstrates a complete OpenTool project with metadata configuratio
    ```bash
    cp .env.example .env
    ```
-   Update the copied file with your own Turnkey, 0x, and Alchemy credentials before running the tooling.
+   Update the file with your required credentials:
+   - `TURNKEY_WALLET_ADDRESS` – Your Turnkey wallet address for receiving payments
+   - Additional API keys as needed for the OpenPond gateway
 
 1. **Install dependencies:**
    ```bash
@@ -38,66 +36,74 @@ This example demonstrates a complete OpenTool project with metadata configuratio
 
 ## Features
 
-This example showcases:
+This template showcases:
 
-- **Custom metadata** – Project information, categories, and discovery data
-- **Tool annotations** – Enhanced tool descriptions and capabilities
-- **Payment configuration** – Optional monetization settings
-- **Complex tool schemas** – Mathematical operations with validation
-- **AI integrations** – Non-streaming calls to `https://gateway.openpond.dev` with optional model overrides
-- **Web search usage** – Automatic inclusion of the OpenPond `websearch` function tool
-- **Streaming demo** – Live SSE handling with incremental text, reasoning, and usage callbacks
+- **X402 Payment Integration** – Built-in payment handling using x402 protocol
+- **AI-Powered Tools** – Question answering using the `opentool/ai` package
+- **Custom Metadata** – Complete project information, categories, and discovery data
+- **Payment Configuration** – Monetization with USDC on Base Sepolia
+- **MCP Server** – Full Model Context Protocol server implementation
+- **Type-Safe Schemas** – Input validation using Zod
+- **Deployment Ready** – Build scripts for generating production-ready MCP servers
 
 ## Generated Files
 
 After building, you'll find these files in `dist/`:
 
-- **`mcp-server.js`** - stdio MCP server for Node/Lambda execution
-- **`metadata.json`** - Complete tool and project metadata (spec `v1.0.0`)
-- **`tools/calculate.js`** - Compiled calculator tool
+- **`mcp-server.js`** – stdio MCP server for Node/Lambda execution
+- **`metadata.json`** – Complete tool and project metadata (spec `v1.0.0`)
+- **`tools/ai-oracle.js`** – Compiled AI Oracle tool
 
 ## Testing
 
-Use the MCP Inspector to test tools. Examples:
+Use the MCP Inspector to test the AI Oracle tool:
 
-- **Calculator:**
-  ```json
-  {
-    "operation": "add",
-    "a": 10,
-    "b": 5
-  }
-  ```
-- **AI summary:**
-  ```json
-  {
-    "topic": "OpenTool AI package release",
-    "tone": "enthusiastic"
-  }
-  ```
-- **AI research:**
-  ```json
-  {
-    "query": "Recent Model Context Protocol updates",
-    "maxResults": 3
-  }
-  ```
-- **Streaming outline:**
-  ```json
-  {
-    "topic": "OpenTool AI package launch",
-    "bulletCount": 5,
-    "includeSummary": true
-  }
-  ```
+**AI Oracle Example:**
+```json
+{
+  "question": "What is the price of BTC?"
+}
+```
 
-Set `OPENPOND_GATEWAY_URL` or `OPENPOND_API_KEY` in your environment if you need to target a custom gateway or authenticated provider.
+Other example questions:
+- "Calculate the square root of 144"
+- "What are the latest developments in AI?"
+- "Explain quantum computing in simple terms"
+
+The tool requires x402 payment before returning results. Set `OPENPOND_GATEWAY_URL` or `OPENPOND_API_KEY` in your environment if you need to target a custom gateway or authenticated provider.
 
 ## Metadata Configuration
 
 The `metadata.ts` file demonstrates how to configure:
 
-- Project information and branding
-- Tool categories and discovery
-- Payment and monetization settings
-- Compatibility requirements
+- **Project Information** – Name, description, version, and branding
+- **Discovery Metadata** – Keywords, use cases, and capabilities
+- **Payment Settings** – X402 configuration with USDC on Base Sepolia
+- **UI Enhancements** – Prompt examples, icons, and media assets
+- **Compatibility** – Platform, language, and framework requirements
+
+## Tool Configuration
+
+Each tool in the `tools/` directory can configure:
+
+- **Schema** – Zod-based input validation
+- **Payment** – Per-tool payment settings using `definePayment`
+- **MCP Integration** – Enable/disable MCP server exposure
+- **Handler** – Async POST function for processing requests
+
+## Use This Template
+
+To create your own MCP agent with x402 support:
+
+1. Clone this repository
+2. Modify `metadata.ts` with your project details
+3. Update `tools/ai-oracle.ts` or create new tools
+4. Configure payment settings and wallet addresses
+5. Build and test with MCP Inspector
+6. Deploy to your preferred hosting platform
+
+## Resources
+
+- [OpenTool Documentation](https://docs.openpond.dev)
+- [Model Context Protocol](https://modelcontextprotocol.io)
+- [X402 Payment Protocol](https://github.com/openpond/x402-spec)
