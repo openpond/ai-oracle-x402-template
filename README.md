@@ -1,4 +1,4 @@
-# AI Oracle MCP X402 Template
+# AI Oracle X402 Template
 
 A template for creating MCP (Model Context Protocol) agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework.
 
