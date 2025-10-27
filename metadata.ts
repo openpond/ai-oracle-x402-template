@@ -1,6 +1,6 @@
 export const metadata = {
   // Core metadata fields (top-level in registry.json)
-  name: "ai-oracle-mcp-x402-template",
+  name: "ai-oracle-x402-template",
   displayName: "AI Oracle MCP X402 Template",
   description: "A template for creating MCP agents with x402 support",
   version: "1.0.0",
