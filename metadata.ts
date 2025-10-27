@@ -6,8 +6,8 @@ export const metadata = {
   version: "1.0.0",
   chains: ["base-sepolia"],
   author: "OpenPond",
-  website: "https://github.com/openpond/ai-oracle-mcp-x402-template",
-  repository: "https://github.com/openpond/ai-oracle-mcp-x402-template",
+  website: "https://github.com/openpond/ai-oracle-x402-template",
+  repository: "https://github.com/openpond/ai-oracle-x402-template",
   category: "example", // Single category for top-level field
   termsOfService: "Please review terms before use.",
   // Payment configuration
