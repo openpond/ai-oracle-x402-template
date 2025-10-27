@@ -15,7 +15,7 @@ export const payment = definePayment({
   currency: "USDC",
   payTo: process.env.WALLET_ADDRESS!,
   message: "Premium analytics require payment before access.",
-  resource: process.env.DEPLOYMENT_URL!,
+  resource: process.env.DEPLOYED_URL!,
   acceptedMethods: ["x402", "402"],
   acceptedCurrencies: ["USDC"],
   chainIds: [8453],
