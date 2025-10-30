@@ -18,7 +18,7 @@ export const metadata = {
     plain402: true,
     acceptedMethods: ["x402", "402"],
     acceptedCurrencies: ["USDC"],
-    chainIds: [8453],
+    chainIds: [84532],
     facilitator: "opentool",
   },
   discovery: {

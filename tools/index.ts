@@ -18,7 +18,7 @@ export const payment = definePayment({
   resource: process.env.DEPLOYED_URL!,
   acceptedMethods: ["x402", "402"],
   acceptedCurrencies: ["USDC"],
-  chainIds: [8453],
+  chainIds: [84532],
   facilitator: "coinbase",
 });
 
@@ -28,6 +28,8 @@ export async function POST(request: Request) {
   const payload = await request.json();
   const { question } = schema.parse(payload);
   const report = await generateText({
+    baseUrl: process.env.OPENPOND_GATEWAY_URL,
+    apiKey: process.env.OPENPOND_API_KEY,
     messages: [
       {
         role: "user",
