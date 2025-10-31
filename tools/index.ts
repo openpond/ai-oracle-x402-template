@@ -19,7 +19,7 @@ export const payment = definePayment({
   acceptedMethods: ["x402", "402"],
   acceptedCurrencies: ["USDC"],
   chains: ["base-sepolia"],
-  facilitator: "opentool", // Use opentool facilitator for Base Sepolia testnet
+  facilitator: "coinbase", // Use opentool facilitator for Base Sepolia testnet
   x402: {
     network: "base-sepolia",
     assetAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e", // Base Sepolia USDC
