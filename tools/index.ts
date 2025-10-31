@@ -18,7 +18,7 @@ export const payment = definePayment({
   resource: process.env.DEPLOYED_URL!,
   acceptedMethods: ["x402", "402"],
   acceptedCurrencies: ["USDC"],
-  chainIds: [84532],
+  chains: ["base-sepolia"],
   facilitator: "opentool", // Use opentool facilitator for Base Sepolia testnet
   x402: {
     network: "base-sepolia",
