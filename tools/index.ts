@@ -20,7 +20,7 @@ export const payment = definePayment({
   acceptedCurrencies: ["USDC"],
   chains: ["base-sepolia"],
   facilitator: {
-    url: "https://facilitator.x402.rs",
+    url: "https://facilitator.x402.rs/",
     verifyPath: "verify",
     settlePath: "settle",
   },
