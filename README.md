@@ -22,6 +22,10 @@ A template for creating MCP (Model Context Protocol) agents with x402 payment su
    - `WALLET_ADDRESS` – Your wallet address for receiving payments
    - `DEPLOYED_URL` – Base URL (e.g. `https://your-app.openpond.live`) used in x402 payment metadata
    - Additional API keys as needed for the OpenPond gateway
+   - Optional overrides:
+     - `X402_FACILITATOR_URL` – Custom facilitator base (defaults to `https://facilitator.x402.rs/x402`)
+     - `X402_NETWORK` – Network slug (`base`, `base-sepolia`, etc.)
+     - `X402_ASSET_ADDRESS` – ERC20 token address if the default for the selected network should be overridden
 
 1. **Install dependencies:**
 
@@ -47,7 +51,7 @@ This template showcases:
 - **X402 Payment Integration** – Built-in payment handling using x402 protocol
 - **AI-Powered Tools** – Question answering using the `opentool/ai` package
 - **Custom Metadata** – Complete project information, categories, and discovery data
-- **Payment Configuration** – Monetization with USDC on Base Sepolia
+- **Payment Configuration** – Monetization with USDC (defaults to Base mainnet, configurable via env)
 - **MCP Server** – Full Model Context Protocol server implementation
 - **Type-Safe Schemas** – Input validation using Zod
 - **Deployment Ready** – Build scripts for generating production-ready MCP servers
@@ -109,7 +113,7 @@ The tool requires x402 payment before returning results. Set `OPENPOND_GATEWAY_U
      -d '{"question":"What is the price of BTC?"}'
    ```
 
-   Replace `${X402_HEADER}` with the base64-encoded `X-PAYMENT` header returned by your Coinbase/OpenTool facilitator. A valid payload returns `200 OK`; otherwise the server sends another `402` with error details.
+   Replace `${X402_HEADER}` with the base64-encoded `X-PAYMENT` header returned by your facilitator (for example, the hosted service at `https://facilitator.x402.rs`). A valid payload returns `200 OK`; otherwise the server sends another `402` with error details.
 
 ## Metadata Configuration
 
