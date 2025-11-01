@@ -1,5 +1,5 @@
 import { generateText } from "opentool/ai";
-import { definePayment } from "opentool/payment";
+import { definePayment, getPaymentContext } from "opentool/payment";
 import { z } from "zod";
 
 export const schema = z.object({
@@ -29,8 +29,26 @@ export const payment = definePayment({
 export const mcp = { enabled: false };
 
 export async function POST(request: Request) {
+  console.log("[x402-template] Incoming request", {
+    hasXPaymentHeader: request.headers.has("X-PAYMENT"),
+    xPaymentPreview: request.headers
+      .get("X-PAYMENT")
+      ?.slice(0, 64),
+  });
+
   const payload = await request.json();
   const { question } = schema.parse(payload);
+
+  console.log("[x402-template] Parsed payload", {
+    questionLength: question.length,
+  });
+
+  const paymentContext = getPaymentContext(request);
+  console.log("[x402-template] Payment context", {
+    optionId: paymentContext?.optionId,
+    verifier: paymentContext?.payment?.verifier,
+  });
+
   const report = await generateText({
     baseUrl: process.env.OPENPOND_GATEWAY_URL,
     apiKey: process.env.OPENPOND_API_KEY,
