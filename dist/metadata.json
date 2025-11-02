@@ -1,12 +1,12 @@
 {
   "metadataSpecVersion": "1.1.0",
-  "name": "ai-oracle-mcp-x402-template",
+  "name": "ai-oracle-x402-template",
   "displayName": "AI Oracle MCP X402 Template",
   "version": "1.0.0",
   "description": "A template for creating MCP agents with x402 support",
   "author": "OpenPond",
-  "repository": "https://github.com/openpond/ai-oracle-mcp-x402-template",
-  "website": "https://github.com/openpond/ai-oracle-mcp-x402-template",
+  "repository": "https://github.com/openpond/ai-oracle-x402-template",
+  "website": "https://github.com/openpond/ai-oracle-x402-template",
   "category": "example",
   "termsOfService": "Please review terms before use.",
   "payment": {
@@ -21,45 +21,52 @@
     "acceptedCurrencies": [
       "USDC"
     ],
-    "chainIds": [
-      8453
+    "chains": [
+      "base-sepolia"
     ],
     "facilitator": "opentool"
   },
   "tools": [
     {
-      "name": "ai-oracle",
-      "description": "ai-oracle tool",
+      "name": "index",
+      "description": "index tool",
       "inputSchema": {
         "type": "object",
-        "properties": {
-          "question": {
-            "type": "string",
-            "minLength": 1,
-            "default": "What is the price of BTC?",
-            "description": "Question to answer"
-          }
-        },
+        "properties": {},
         "additionalProperties": false
       },
       "annotations": {
         "requiresPayment": true
       },
       "payment": {
-        "amountUSDC": 0.001,
-        "x402": true,
-        "plain402": true,
-        "acceptedMethods": [
-          "x402",
-          "402"
-        ],
-        "acceptedCurrencies": [
-          "USDC"
-        ],
-        "chainIds": [
-          8453
-        ],
-        "facilitator": "coinbase"
+        "definition": {
+          "amount": "0.001",
+          "currency": {
+            "code": "USDC",
+            "symbol": "USDC",
+            "decimals": 6
+          },
+          "asset": {
+            "symbol": "USDC",
+            "network": "base-sepolia",
+            "address": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+            "decimals": 6
+          },
+          "scheme": "exact",
+          "network": "base-sepolia",
+          "facilitator": {
+            "url": "https://facilitator.x402.rs",
+            "verifyPath": "/verify",
+            "settlePath": "/settle",
+            "apiKeyHeader": "Authorization"
+          },
+          "description": "Premium analytics require payment before access."
+        },
+        "metadata": {
+          "amountUSDC": 0.001,
+          "facilitator": "x402rs",
+          "network": "base-sepolia"
+        }
       },
       "chains": [
         "base-sepolia"
@@ -94,11 +101,6 @@
         "varies by tool"
       ]
     },
-    "pricing": {
-      "model": "pay-per-use",
-      "defaultAmount": 0.001,
-      "description": "Very low cost example tools for learning and testing"
-    },
     "compatibility": {
       "platforms": [
         "web",
@@ -116,6 +118,11 @@
       "regions": [
         "global"
       ]
+    },
+    "pricing": {
+      "model": "pay-per-use",
+      "defaultAmount": 0.001,
+      "description": "Very low cost example tools for learning and testing"
     }
   },
   "promptExamples": [

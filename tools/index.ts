@@ -1,5 +1,5 @@
 import { generateText } from "opentool/ai";
-import { definePayment, getPaymentContext } from "opentool/payment";
+import { defineX402Payment } from "opentool/x402";
 import { z } from "zod";
 
 export const schema = z.object({
@@ -10,46 +10,22 @@ export const schema = z.object({
     .describe("Question to answer"),
 });
 
-export const payment = definePayment({
+export const payment = defineX402Payment({
   amount: "0.001",
   currency: "USDC",
   payTo: process.env.WALLET_ADDRESS!,
   message: "Premium analytics require payment before access.",
   resource: process.env.DEPLOYED_URL!,
-  acceptedMethods: ["x402", "402"],
-  acceptedCurrencies: ["USDC"],
-  chains: ["base-sepolia"],
-  facilitator: {
-    url: "https://facilitator.x402.rs/",
-    verifyPath: "verify",
-    settlePath: "settle",
-  },
-  x402: {
-    network: "base-sepolia",
-    assetAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
-  },
+  network: "base-sepolia",
+  assetAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+  scheme: "exact",
 });
 
 export const mcp = { enabled: false };
 
 export async function POST(request: Request) {
-  console.log("[x402-template] Incoming request", {
-    hasXPaymentHeader: request.headers.has("X-PAYMENT"),
-    xPaymentPreview: request.headers.get("X-PAYMENT")?.slice(0, 64),
-  });
-
   const payload = await request.json();
   const { question } = schema.parse(payload);
-
-  console.log("[x402-template] Parsed payload", {
-    questionLength: question.length,
-  });
-
-  const paymentContext = getPaymentContext(request);
-  console.log("[x402-template] Payment context", {
-    optionId: paymentContext?.optionId,
-    verifier: paymentContext?.payment?.verifier,
-  });
 
   const report = await generateText({
     messages: [
@@ -59,6 +35,7 @@ export async function POST(request: Request) {
       },
     ],
   });
+
   return new Response(
     JSON.stringify({
       report,
