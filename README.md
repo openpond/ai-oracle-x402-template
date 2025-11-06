@@ -1,4 +1,4 @@
-# x402 Starter on Base Network
+# x402 Starter Kit
 
 [![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=flat)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
 [![x402 Facilitator DuckAI](https://img.shields.io/badge/x402_Facilitator-Duckai-FFFFFF?style=flat&logo=data:image/svg+xml;base64,%3Cencoded-logo%3E&logoColor=white&labelColor=0B1E3F)](https://facilitator.duckai.ai)
