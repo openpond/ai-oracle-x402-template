@@ -1,9 +1,9 @@
-# x402 Base Sepolia Template
+# x402 Starter on Base Network
 
 [![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=flat)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
 [![x402 Facilitator DuckAI](https://img.shields.io/badge/x402_Facilitator-Duckai-FFFFFF?style=flat&logo=data:image/svg+xml;base64,%3Cencoded-logo%3E&logoColor=white&labelColor=0B1E3F)](https://facilitator.duckai.ai)
 
-A template for creating agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework. The template defaults to the [DuckAI](https://facilitator.duckai.ai) facilitator and can be hosted on [OpenPond](https://openpond.ai).
+A template for creating agents with x402 payment support on Base. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework. The template defaults to the [DuckAI](https://facilitator.duckai.ai) facilitator and can be hosted on [OpenPond](https://openpond.ai).
 
 ## Quick Start
 
@@ -48,4 +48,4 @@ A template for creating agents with x402 payment support. This project demonstra
    bunx tsx scripts/test-x402-client.ts
    ```
 
-   The script performs the full x402 flow: it makes the initial request, captures the 402 response from DuckAI, signs the transfer authorization, and retries with the `X-PAYMENT` header. Optional overrides include `PAYMENT_URL` (defaults to `http://localhost:7000/ai-oracle`), `RPC_URL` for a different Ethereum RPC, and `QUESTION` to change the payload. Successful runs print the payment details, HTTP status, and the paid response body.
+   The script performs the full x402 flow: it makes the initial request, captures the 402 response, signs the transfer authorization, and retries with the `X-PAYMENT` header. Optional overrides include `PAYMENT_URL` (defaults to `http://localhost:7000/ai-oracle`), `RPC_URL` for a different Ethereum RPC, and `QUESTION` to change the payload. Successful runs print the payment details, HTTP status, and the paid response body.
