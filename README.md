@@ -1,6 +1,6 @@
 # AI Oracle x402 Base Sepolia
 
-[![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=for-the-badge)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
+[![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=flat)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
 [![x402 Facilitator DuckAI](https://img.shields.io/badge/x402_Facilitator-Duckai-FFFFFF?style=flat&logo=data:image/svg+xml;base64,%3Cencoded-logo%3E&logoColor=white&labelColor=0B1E3F)](https://facilitator.duckai.ai)
 
 A template for creating agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework. The template defaults to the [DuckAI](https://facilitator.duckai.ai) facilitator and can be hosted on [OpenPond](https://openpond.ai).
