@@ -1,13 +1,9 @@
-# AI Oracle X402 Template
+# AI Oracle x402 Base Sepolia
 
-A template for creating MCP (Model Context Protocol) agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework.
+[![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=for-the-badge)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
+[![x402 Facilitator DuckAI](https://img.shields.io/badge/x402_Facilitator-Duckai-FFFFFF?style=flat&logo=data:image/svg+xml;base64,%3Cencoded-logo%3E&logoColor=white&labelColor=0B1E3F)](https://facilitator.duckai.ai)
 
-## Files
-
-- `tools/ai-oracle.ts` – AI-powered question answering tool with x402 payment integration
-- `metadata.ts` – Complete metadata configuration including payment settings
-- `package.json` – Project configuration with OpenTool dependencies
-- `dist/` – Generated files after build
+A template for creating agents with x402 payment support. This project demonstrates how to build AI-powered tools with integrated payment handling using the OpenTool framework. The template defaults to the [DuckAI](https://facilitator.duckai.ai) facilitator and can be hosted on [OpenPond](https://openpond.ai).
 
 ## Quick Start
 
@@ -27,126 +23,31 @@ A template for creating MCP (Model Context Protocol) agents with x402 payment su
      - `X402_NETWORK` – Network slug (`base`, `base-sepolia`, etc.)
      - `X402_ASSET_ADDRESS` – ERC20 token address if the default for the selected network should be overridden
 
-1. **Install dependencies:**
+2. **Install dependencies:**
 
    ```bash
    bun install
    ```
 
-1. **Build the project:**
+3. **Build the project:**
 
    ```bash
-   bun run build
+   npx opentool build
    ```
 
-1. **Test locally with MCP Inspector:**
-   ```bash
-   npx @modelcontextprotocol/inspector node dist/mcp-server.js
-   ```
-
-## Features
-
-This template showcases:
-
-- **X402 Payment Integration** – Built-in payment handling using x402 protocol
-- **AI-Powered Tools** – Question answering using the `opentool/ai` package
-- **Custom Metadata** – Complete project information, categories, and discovery data
-- **Payment Configuration** – Monetization with USDC (defaults to Base mainnet, configurable via env)
-- **MCP Server** – Full Model Context Protocol server implementation
-- **Type-Safe Schemas** – Input validation using Zod
-- **Deployment Ready** – Build scripts for generating production-ready MCP servers
-
-## Generated Files
-
-After building, you'll find these files in `dist/`:
-
-- **`mcp-server.js`** – stdio MCP server for Node/Lambda execution (if mcp is enabled)
-- **`metadata.json`** – Complete tool and project metadata (spec `v1.0.0`)
-- **`tools/ai-oracle.js`** – Compiled AI Oracle tool
-
-## Testing
-
-Use the MCP Inspector to test the AI Oracle tool:
-
-**AI Oracle Example:**
-
-```json
-{
-  "question": "What is the price of BTC?"
-}
-```
-
-Other example questions:
-
-- "Calculate the square root of 144"
-- "What are the latest developments in AI?"
-- "Explain quantum computing in simple terms"
-
-The tool requires x402 payment before returning results. Set `OPENPOND_GATEWAY_URL` or `OPENPOND_API_KEY` in your environment if you need to target a custom gateway or authenticated provider.
-
-### Quick x402 test with curl
-
-1. Start the dev server:
+4. **Run the project:**
 
    ```bash
-   npx opentool dev --input tools
+   npx opentool dev
    ```
 
-2. Trigger the paywall and inspect the returned payment requirements:
+5. Exercise the paywall end-to-end with the helper script (keep `npx opentool dev` running):
 
    ```bash
-   curl -i \
-     -X POST http://localhost:7000/ai-oracle \
-     -H "content-type: application/json" \
-     -d '{"question":"What is the price of BTC?"}'
+   PRIVATE_KEY=0xyour_private_key \
+   bunx tsx scripts/test-x402-client.ts
    ```
 
-   The response includes `402 Payment Required` with an `x402.accepts[0]` object that references your `DEPLOYED_URL`.
+   The script performs the full x402 flow: it makes the initial request, captures the 402 response from DuckAI, signs the transfer authorization, and retries with the `X-PAYMENT` header. Optional overrides include `PAYMENT_URL` (defaults to `http://localhost:7000/ai-oracle`), `RPC_URL` for a different Ethereum RPC, and `QUESTION` to change the payload. Successful runs print the payment details, HTTP status, and the paid response body.
 
-3. Submit a follow-up request using a facilitator-signed payload:
-
-   ```bash
-   curl -i \
-     -X POST http://localhost:7000/ai-oracle \
-     -H "content-type: application/json" \
-     -H "X-PAYMENT: ${X402_HEADER}" \
-     -d '{"question":"What is the price of BTC?"}'
-   ```
-
-   Replace `${X402_HEADER}` with the base64-encoded `X-PAYMENT` header returned by your facilitator (for example, the hosted service at `https://facilitator.x402.rs`). A valid payload returns `200 OK`; otherwise the server sends another `402` with error details.
-
-## Metadata Configuration
-
-The `metadata.ts` file demonstrates how to configure:
-
-- **Project Information** – Name, description, version, and branding
-- **Discovery Metadata** – Keywords, use cases, and capabilities
-- **Payment Settings** – X402 configuration with USDC on Base Sepolia
-- **UI Enhancements** – Prompt examples, icons, and media assets
-- **Compatibility** – Platform, language, and framework requirements
-
-## Tool Configuration
-
-Each tool in the `tools/` directory can configure:
-
-- **Schema** – Zod-based input validation
-- **Payment** – Per-tool payment settings using `definePayment`
-- **MCP Integration** – Enable/disable MCP server exposure
-- **Handler** – Async POST function for processing requests
-
-## Use This Template
-
-To create your own MCP agent with x402 support:
-
-1. Clone this repository
-2. Modify `metadata.ts` with your project details
-3. Update `tools/ai-oracle.ts` or create new tools
-4. Configure payment settings and wallet addresses
-5. Build and test with MCP Inspector
-6. Deploy to your preferred hosting platform
-
-## Resources
-
-- [OpenTool Documentation](https://docs.openpond.dev)
-- [Model Context Protocol](https://modelcontextprotocol.io)
-- [X402 Payment Protocol](https://github.com/openpond/x402-spec)
+Once the flow works locally you can deploy the same tool to [OpenPond](https://openpond.ai).

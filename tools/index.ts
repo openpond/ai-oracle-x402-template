@@ -6,7 +6,7 @@ export const schema = z.object({
   question: z
     .string()
     .min(1)
-    .default("What is the price of BTC?")
+    .default("Who created Bitcoin?")
     .describe("Question to answer"),
 });
 
@@ -19,7 +19,7 @@ export const payment = defineX402Payment({
   network: "base-sepolia",
   assetAddress: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
   scheme: "exact",
-  facilitator: "https://facilitator.openpond.dev",
+  facilitator: "https://facilitator.duckai.ai",
 });
 
 export const mcp = { enabled: false };

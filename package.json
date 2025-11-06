@@ -1,7 +1,7 @@
 {
-  "name": "ai-oracle-x402-template",
+  "name": "ai-oracle-x402-base-sepolia",
   "version": "1.0.0",
-  "description": "A template for creating MCP agents with X402 support",
+  "description": "A simple AI endpoint that works with x402 and Base Sepolia Testnet",
   "scripts": {
     "dev": "opentool dev",
     "build": "opentool build --input tools --output dist",
