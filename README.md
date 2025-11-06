@@ -1,4 +1,4 @@
-# AI Oracle x402 Base Sepolia
+# x402 Base Sepolia Template
 
 [![Deploy on OpenPond](https://img.shields.io/badge/Deploy_on-OpenPond-1E90FF?style=flat)](https://openpond.ai/project/new?repo=openpond/ai-oracle-x402-base-sepolia&ref=readme-host-button)
 [![x402 Facilitator DuckAI](https://img.shields.io/badge/x402_Facilitator-Duckai-FFFFFF?style=flat&logo=data:image/svg+xml;base64,%3Cencoded-logo%3E&logoColor=white&labelColor=0B1E3F)](https://facilitator.duckai.ai)
@@ -49,5 +49,3 @@ A template for creating agents with x402 payment support. This project demonstra
    ```
 
    The script performs the full x402 flow: it makes the initial request, captures the 402 response from DuckAI, signs the transfer authorization, and retries with the `X-PAYMENT` header. Optional overrides include `PAYMENT_URL` (defaults to `http://localhost:7000/ai-oracle`), `RPC_URL` for a different Ethereum RPC, and `QUESTION` to change the payload. Successful runs print the payment details, HTTP status, and the paid response body.
-
-Once the flow works locally you can deploy the same tool to [OpenPond](https://openpond.ai).
